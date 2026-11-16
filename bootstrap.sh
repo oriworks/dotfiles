@@ -1,8 +1,26 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-sudo apt install zsh -y
-chsh -s $(which zsh)
+# 1. Instalação do ZSH
+PACKAGES=("zsh")
+MISSING=()
+
+for pkg in "${PACKAGES[@]}"; do
+    if ! dpkg -s "$pkg" >/dev/null 2>&1; then
+        MISSING+=("$pkg")
+    fi
+done
+
+if [ ${#MISSING[@]} -gt 0 ]; then
+    sudo apt update && sudo apt install -y "${MISSING[@]}"
+fi
+
+ZSH_PATH=$(which zsh)
+ACTUAL_SHELL=$(getent passwd "$USER" | cut -d: -f7)
+
+if [ "$ACTUAL_SHELL" != "$ZSH_PATH" ]; then
+    sudo chsh -s "$ZSH_PATH" "$USER"
+fi
 
 curl -fsSL https://mise.run | sh
 
