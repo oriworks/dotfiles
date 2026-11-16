@@ -2,6 +2,7 @@
 set -euo pipefail
 
 sudo apt install zsh -y
+chsh -s $(which zsh)
 
 curl -fsSL https://mise.run | sh
 
