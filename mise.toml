@@ -2,7 +2,6 @@
 experimental = true
 
 [tools]
-zsh = "latest"
 claude = "latest"
 direnv = "latest"
 
