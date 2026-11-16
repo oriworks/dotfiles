@@ -1,0 +1,9 @@
+[settings]
+experimental = true
+
+[tools]
+claude = "latest"
+direnv = "latest"
+
+[bootstrap.mise_shell_activate.zsh]
+enabled = true
