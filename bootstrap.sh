@@ -28,6 +28,16 @@ if ! grep -qF "$MARKER" "$ZSHENV" 2>/dev/null; then
   {
     echo "$MARKER"
     echo 'export PATH="$HOME/.local/bin:$PATH"'
+    echo ''
+    echo 'if [[ -z "$XDG_CONFIG_HOME" ]]'
+    echo 'then'
+    echo '    export XDG_CONFIG_HOME="$HOME/.config"'
+    echo 'fi'
+    echo ''
+    echo 'if [[ -d "$XDG_CONFIG_HOME/zsh" ]]'
+    echo 'then'
+    echo '    export ZDOTDIR="$XDG_CONFIG_HOME/zsh"'
+    echo 'fi'
     echo "# <<< bootstrap.sh: mise on PATH <<<"
   } >> "$ZSHENV"
   echo "added ~/.local/bin to PATH in $ZSHENV"
